@@ -60,7 +60,7 @@
 
 	async function getData() {
 		const res = await fetch(
-			"http://127.0.0.1:5000/get_novy_bod/" + strana,
+			"https://slibotechnyapi.pythonanywhere.com/get_novy_bod/" + strana,
 			{
 				method: "GET",
 				headers: {
@@ -75,21 +75,24 @@
 	}
 
 	async function createBod() {
-		const res = await fetch("http://127.0.0.1:5000/post_bod_programu", {
-			method: "POST",
-			headers: {
-				"content-type": "application/json",
-			},
-			body: JSON.stringify({
-				strana: strana.nazev,
-				nadpis: nadpis,
-				telo: telo,
-				kategorie: selectedKategorie.jmeno,
-				splneno: selectedSplneno.cislo,
-				priorita: priorita,
-				prioritaStrany: prioritaStrany,
-			}),
-		});
+		const res = await fetch(
+			"https://slibotechnyapi.pythonanywhere.com/post_bod_programu",
+			{
+				method: "POST",
+				headers: {
+					"content-type": "application/json",
+				},
+				body: JSON.stringify({
+					strana: strana.nazev,
+					nadpis: nadpis,
+					telo: telo,
+					kategorie: selectedKategorie.jmeno,
+					splneno: selectedSplneno.cislo,
+					priorita: priorita,
+					prioritaStrany: prioritaStrany,
+				}),
+			}
+		);
 		window.history.back();
 	}
 

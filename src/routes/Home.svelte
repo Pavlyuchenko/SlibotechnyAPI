@@ -13,12 +13,15 @@
 	var strany = [];
 
 	async function getData() {
-		const res = await fetch("http://127.0.0.1:5000/get_strany", {
-			method: "GET",
-			headers: {
-				"content-type": "application/json",
-			},
-		});
+		const res = await fetch(
+			"https://slibotechnyapi.pythonanywhere.com/get_strany",
+			{
+				method: "GET",
+				headers: {
+					"content-type": "application/json",
+				},
+			}
+		);
 		const json = await res.json();
 		strany = json.strany;
 	}

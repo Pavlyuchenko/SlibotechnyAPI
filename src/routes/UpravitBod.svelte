@@ -60,12 +60,15 @@
 	});
 
 	async function getData() {
-		const res = await fetch("http://127.0.0.1:5000/get_bod/" + id, {
-			method: "GET",
-			headers: {
-				"content-type": "application/json",
-			},
-		});
+		const res = await fetch(
+			"https://slibotechnyapi.pythonanywhere.com/get_bod/" + id,
+			{
+				method: "GET",
+				headers: {
+					"content-type": "application/json",
+				},
+			}
+		);
 		const json = await res.json();
 
 		strana = json.strana;
@@ -86,22 +89,25 @@
 	}
 
 	async function createBod() {
-		const res = await fetch("http://127.0.0.1:5000/update_bod_programu", {
-			method: "POST",
-			headers: {
-				"content-type": "application/json",
-			},
-			body: JSON.stringify({
-				id: id,
-				strana: strana.nazev,
-				nadpis: nadpis,
-				telo: telo,
-				kategorie: selectedKategorie.jmeno,
-				splneno: selectedSplneno.cislo,
-				priorita: priorita,
-				prioritaStrany: prioritaStrany,
-			}),
-		});
+		const res = await fetch(
+			"https://slibotechnyapi.pythonanywhere.com/update_bod_programu",
+			{
+				method: "POST",
+				headers: {
+					"content-type": "application/json",
+				},
+				body: JSON.stringify({
+					id: id,
+					strana: strana.nazev,
+					nadpis: nadpis,
+					telo: telo,
+					kategorie: selectedKategorie.jmeno,
+					splneno: selectedSplneno.cislo,
+					priorita: priorita,
+					prioritaStrany: prioritaStrany,
+				}),
+			}
+		);
 		window.history.back();
 	}
 
@@ -112,7 +118,8 @@
 			)
 		) {
 			const res = await fetch(
-				"http://127.0.0.1:5000/delete_bod_programu/" + id,
+				"https://slibotechnyapi.pythonanywhere.com/delete_bod_programu/" +
+					id,
 				{
 					method: "DELETE",
 					headers: {

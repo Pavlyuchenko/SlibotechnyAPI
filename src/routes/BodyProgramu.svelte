@@ -14,7 +14,8 @@
 
 	async function getData() {
 		const res = await fetch(
-			"http://127.0.0.1:5000/get_body_programu/" + strana,
+			"https://slibotechnyapi.pythonanywhere.com/get_body_programu/" +
+				strana,
 			{
 				method: "POST",
 				headers: {
