@@ -43,20 +43,25 @@
 	let priorita = 5;
 	let prioritaStrany = 5;
 
-	var nadpis;
-	var telo;
+	var nadpis = "";
+	var popis = "";
+	var citace = "";
+	var odkaz = "";
+	var navrhy = [{ id: 1, text: "", splneno: "1" }];
 
 	onMount(() => {
 		window.scrollTo(0, 0);
 		getData();
 
-		document.getElementById("telo").addEventListener("paste", function (e) {
-			e.preventDefault();
-			var text = (e.originalEvent || e).clipboardData.getData(
-				"text/plain"
-			);
-			document.execCommand("insertHTML", false, text);
-		});
+		document
+			.getElementById("popis")
+			.addEventListener("paste", function (e) {
+				e.preventDefault();
+				var text = (e.originalEvent || e).clipboardData.getData(
+					"text/plain"
+				);
+				document.execCommand("insertHTML", false, text);
+			});
 	});
 
 	async function getData() {
@@ -70,7 +75,7 @@
 			}
 		);
 		const json = await res.json();
-
+		console.log(json);
 		strana = json.strana;
 		kategorie = json.kategorie;
 
@@ -85,7 +90,10 @@
 			json.bp.priorita_strany != null ? json.bp.priorita_strany : 5;
 
 		nadpis = json.bp.nadpis;
-		telo = json.bp.argumentace;
+		popis = json.bp.argumentace;
+		odkaz = json.bp.odkaz;
+		citace = json.bp.citace;
+		navrhy = json.bp.navrhy;
 	}
 
 	async function createBod() {
@@ -100,7 +108,10 @@
 					id: id,
 					strana: strana.nazev,
 					nadpis: nadpis,
-					telo: telo,
+					popis: popis,
+					odkaz: odkaz,
+					citace: citace,
+					navrhy: navrhy,
 					kategorie: selectedKategorie.jmeno,
 					splneno: selectedSplneno.cislo,
 					priorita: priorita,
@@ -155,16 +166,98 @@
 	<p
 		class="label"
 		on:click={() => {
-			document.getElementById("telo").focus();
+			document.getElementById("popis").focus();
 		}}
 	>
-		Tělo
+		Popis
 	</p>
 	<div
 		contenteditable="true"
-		id="telo"
+		id="popis"
 		style="border: 4px solid {strana.barva}"
-		bind:innerHTML={telo}
+		bind:innerHTML={popis}
+	/>
+
+	<div id="navrhy">
+		<p
+			id="p-citace"
+			class="label"
+			on:click={() => {
+				document.getElementById("navrh1").focus();
+			}}
+		>
+			Navrhy
+		</p>
+		<div>
+			{#each navrhy as navrh}
+				<div
+					contenteditable=""
+					id={"navrh" + navrh.id}
+					class="navrh"
+					style="border: 4px solid {strana.barva}"
+					on:input={() => {
+						console.log(navrhy);
+					}}
+					bind:innerHTML={navrh.text}
+				>
+					{navrh.text}
+				</div>
+			{/each}
+			<div
+				on:click={() => {
+					navrhy.push({
+						id: navrhy[navrhy.length - 1].id + 1,
+						text: "",
+						splneno: 1,
+					});
+					navrhy = navrhy;
+					setTimeout(() => {
+						document
+							.getElementById(
+								"navrh" + navrhy[navrhy.length - 1].id
+							)
+							.focus();
+					}, 1);
+				}}
+				id="dalsi-navrh"
+				style="background-color: {strana.barva}; color: {strana.sekundarni_barva};"
+			>
+				Další návrh
+			</div>
+		</div>
+	</div>
+
+	<p
+		id="p-citace"
+		class="label"
+		on:click={() => {
+			document.getElementById("citace").focus();
+		}}
+	>
+		Citace
+	</p>
+	<input
+		type="text"
+		id="citace"
+		class="text-input"
+		style="border: 4px solid {strana.barva}"
+		bind:value={citace}
+	/>
+	<p
+		id="p-odkaz"
+		class="label"
+		on:click={() => {
+			document.getElementById("odkaz").focus();
+		}}
+	>
+		Odkaz
+	</p>
+	<input
+		type="text"
+		id="odkaz"
+		class="text-input"
+		style="border: 4px solid {strana.barva}"
+		bind:value={odkaz}
 	/>
 
 	<div class="flex">
@@ -281,7 +374,23 @@
 		filter: brightness(90%);
 	}
 
-	#telo {
+	.text-input {
+		width: 100%;
+		color: #2d2d2d;
+		font-size: 20px;
+		font-family: "Barlow";
+
+		padding: 8px 10px;
+		box-sizing: border-box;
+		border-radius: 5px;
+		transition: 0.15s;
+	}
+	.text-input:focus {
+		-webkit-filter: brightness(90%);
+		filter: brightness(90%);
+	}
+
+	#popis {
 		background-color: #ffffff;
 		color: #2d2d2d;
 
@@ -293,14 +402,47 @@
 		box-sizing: border-box;
 		border-radius: 5px;
 
-		height: 200px;
+		height: 150px;
 		overflow-y: scroll;
 
 		transition: 0.15s;
 	}
-	#telo:focus {
+	#popis:focus {
 		-webkit-filter: brightness(90%);
 		filter: brightness(90%);
+	}
+	.navrh {
+		background-color: #ffffff;
+		color: #2d2d2d;
+
+		width: 100%;
+		font-size: 20px;
+		font-family: "Barlow";
+
+		padding: 8px 10px;
+		margin-bottom: 5px;
+
+		box-sizing: border-box;
+		border-radius: 5px;
+
+		overflow-y: scroll;
+
+		transition: 0.15s;
+	}
+	.navrh:focus {
+		-webkit-filter: brightness(90%);
+		filter: brightness(90%);
+	}
+	#dalsi-navrh {
+		padding: 8px 15px;
+		display: inline-block;
+		cursor: pointer;
+		border-radius: 5px;
+		transition: 0.15s;
+	}
+	#dalsi-navrh:hover {
+		filter: brightness(75%);
+		-webkit-filter: brightness(75%);
 	}
 
 	#kategorie {
