@@ -24,6 +24,7 @@
 			}
 		);
 		const json = await res.json();
+		console.log(json);
 		bodyProgramu = json.body_programu;
 		strana = json.strana;
 	}
@@ -52,9 +53,35 @@
 				>
 					{bp.nadpis}
 				</span>
-				<div class="splneno" style="background-color: #4CAF50;">
-					<img src={"/images/tick.png"} alt="Tick" />
-				</div>
+				{#if bp.splneno == 1}
+					<div
+						class="splneno"
+						style="background-color: rgb(76, 175, 80);"
+					>
+						<img src={"/images/tick.png"} alt="Tick" />
+					</div>
+				{:else if bp.splneno == 2}
+					<div
+						class="splneno"
+						style="background-color: rgb(223, 71, 89);"
+					>
+						<img src={"/images/cross.png"} alt="Tick" />
+					</div>
+				{:else if bp.splneno == 3}
+					<div
+						class="splneno"
+						style="background-color: rgb(255, 193, 7);"
+					>
+						<img src={"/images/qm.png"} alt="Tick" />
+					</div>
+				{:else if bp.splneno == 4}
+					<div
+						class="splneno"
+						style="background-color: rgb(130, 136, 144);"
+					>
+						<img src={"/images/-.png"} alt="Tick" />
+					</div>
+				{/if}
 			</div>
 		{/each}
 	</div>
@@ -113,14 +140,14 @@
 	}
 	.splneno {
 		position: relative;
-		width: 80px;
+		width: 70px;
 		border-radius: 0 2px 2px 0;
 	}
 	.splneno img {
 		position: absolute;
 		top: 50%;
-		left: 10px;
-		transform: translateY(-50%);
+		left: 50%;
+		transform: translateY(-50%) translateX(-50%);
 	}
 
 	#novy-bod {

@@ -75,7 +75,6 @@
 			}
 		);
 		const json = await res.json();
-		console.log(json);
 		strana = json.strana;
 		kategorie = json.kategorie;
 
@@ -93,7 +92,9 @@
 		popis = json.bp.argumentace;
 		odkaz = json.bp.odkaz;
 		citace = json.bp.citace;
-		navrhy = json.bp.navrhy;
+		if (json.bp.navrhy.length > 0) {
+			navrhy = json.bp.navrhy;
+		}
 	}
 
 	async function createBod() {
@@ -195,9 +196,6 @@
 					id={"navrh" + navrh.id}
 					class="navrh"
 					style="border: 4px solid {strana.barva}"
-					on:input={() => {
-						console.log(navrhy);
-					}}
 					bind:innerHTML={navrh.text}
 				>
 					{navrh.text}
