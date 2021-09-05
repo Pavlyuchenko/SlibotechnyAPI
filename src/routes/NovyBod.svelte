@@ -298,6 +298,10 @@
 </section>
 
 <style>
+	[contenteditable] {
+		-webkit-user-select: text;
+		user-select: text;
+	}
 	section {
 		margin: 0px calc((100% - 70rem) / 2) 0px calc((100% - 70rem) / 2);
 		padding-top: 50px;
