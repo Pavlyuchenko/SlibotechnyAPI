@@ -62,6 +62,16 @@
 				);
 				document.execCommand("insertHTML", false, text);
 			});
+
+		document
+			.getElementById("navrh1")
+			.addEventListener("paste", function (e) {
+				e.preventDefault();
+				var text = (e.originalEvent || e).clipboardData.getData(
+					"text/plain"
+				);
+				document.execCommand("insertHTML", false, text);
+			});
 	});
 
 	async function getData() {
@@ -215,6 +225,18 @@
 								"navrh" + navrhy[navrhy.length - 1].id
 							)
 							.focus();
+
+						document
+							.getElementById(
+								"navrh" + navrhy[navrhy.length - 1].id
+							)
+							.addEventListener("paste", function (e) {
+								e.preventDefault();
+								var text = (
+									e.originalEvent || e
+								).clipboardData.getData("text/plain");
+								document.execCommand("insertHTML", false, text);
+							});
 					}, 1);
 				}}
 				id="dalsi-navrh"
@@ -234,11 +256,11 @@
 	>
 		Citace
 	</p>
-	<input
-		type="text"
+	<textarea
 		id="citace"
 		class="text-input"
 		style="border: 4px solid {strana.barva}"
+		rows="3"
 		bind:value={citace}
 	/>
 	<p
