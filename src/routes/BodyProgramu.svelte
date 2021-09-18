@@ -58,28 +58,28 @@
 						class="splneno"
 						style="background-color: rgb(76, 175, 80);"
 					>
-						<img src={"/images/tick.png"} alt="Tick" />
+						<img src={"/images/tick.png"} alt="Fajfka" />
 					</div>
 				{:else if bp.splneno == 2}
 					<div
 						class="splneno"
 						style="background-color: rgb(223, 71, 89);"
 					>
-						<img src={"/images/cross.png"} alt="Tick" />
+						<img src={"/images/cross.png"} alt="Křížek" />
 					</div>
 				{:else if bp.splneno == 3}
 					<div
 						class="splneno"
 						style="background-color: rgb(255, 193, 7);"
 					>
-						<img src={"/images/qm.png"} alt="Tick" />
+						<img src={"/images/qm.png"} alt="Otazník" />
 					</div>
 				{:else if bp.splneno == 4}
 					<div
 						class="splneno"
 						style="background-color: rgb(130, 136, 144);"
 					>
-						<img src={"/images/-.png"} alt="Tick" />
+						<img src={"/images/-.png"} alt="Pomlčka" />
 					</div>
 				{/if}
 			</div>

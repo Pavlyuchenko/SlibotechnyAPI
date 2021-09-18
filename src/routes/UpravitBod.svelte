@@ -47,7 +47,7 @@
 	var popis = "";
 	var citace = "";
 	var odkaz = "";
-	var navrhy = [{ id: 1, text: "", splneno: "1" }];
+	var navrhy = [{ id: 1, text: "", splneno: 4 }];
 
 	onMount(() => {
 		window.scrollTo(0, 0);
@@ -130,7 +130,7 @@
 				}),
 			}
 		);
-		window.history.back();
+		navigate("/strana/" + strana.nazev);
 	}
 
 	async function smazBod() {
@@ -201,14 +201,29 @@
 		</p>
 		<div>
 			{#each navrhy as navrh}
-				<div
-					contenteditable=""
-					id={"navrh" + navrh.id}
-					class="navrh"
-					style="border: 4px solid {strana.barva}"
-					bind:innerHTML={navrh.text}
-				>
-					{navrh.text}
+				<div class="flex">
+					<select
+						class="splneno"
+						style="background: {splneno[navrh.splneno - 1]
+							?.barva} no-repeat 95% !important;"
+						bind:value={navrh.splneno}
+					>
+						{#each splneno as s}
+							<option
+								value={s.cislo}
+								style="background-color: {s.barva};"
+							>
+								{s.symbol}
+							</option>
+						{/each}
+					</select>
+					<input
+						type="text"
+						id={"navrh" + navrh.id}
+						class="navrh"
+						style="border: 4px solid {strana.barva}"
+						bind:value={navrh.text}
+					/>
 				</div>
 			{/each}
 			<div
@@ -306,10 +321,7 @@
 				bind:value={selectedSplneno}
 			>
 				{#each splneno as s}
-					<option
-						value={s}
-						style="background-color: {s.barva}; background-image:url(/images/tick.png);"
-					>
+					<option value={s} style="background-color: {s.barva};">
 						{s.symbol}
 					</option>
 				{/each}
@@ -506,6 +518,25 @@
 		font-size: 22px;
 		font-family: "Barlow";
 		font-weight: 500;
+	}
+	.splneno {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+
+		border: 0;
+		border-radius: 3px;
+		color: #ffffff;
+
+		width: 40px;
+		height: 45px;
+		padding: 0 10px;
+		margin-right: 5px;
+
+		font-size: 25px;
+		font-family: "Barlow";
+		font-weight: 500;
+		text-align: center;
 	}
 
 	.flex {
