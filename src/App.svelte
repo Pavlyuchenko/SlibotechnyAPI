@@ -7,6 +7,7 @@
 	import BodyProgramu from "./routes/BodyProgramu.svelte";
 	import NovyBod from "./routes/NovyBod.svelte";
 	import UpravitBod from "./routes/UpravitBod.svelte";
+	import NapsatClanek from "./routes/NapsatClanek.svelte";
 
 	export let url = "";
 
@@ -68,6 +69,9 @@
 	</Route>
 	<Route path="/upravit-bod/:id" let:params>
 		<UpravitBod id={params.id} />
+	</Route>
+	<Route path="/napsat-clanek">
+		<NapsatClanek />
 	</Route>
 </Router>
 

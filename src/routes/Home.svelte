@@ -40,9 +40,27 @@
 			<span>{strana.nazev}</span>
 		</div>
 	{/each}
+
+	<a href="/napsat-clanek" id="napsat-clanek">Napsat článek</a>
 </section>
 
 <style>
+	#napsat-clanek {
+		position: fixed;
+		bottom: 15px;
+		right: 15px;
+
+		color: #fff;
+		background-color: #4caf50;
+		padding: 10px 15px;
+
+		font-size: 28px;
+		font-weight: 700;
+		transition: 0.15s;
+	}
+	#napsat-clanek:hover {
+		background-color: #3d9140;
+	}
 	section {
 		display: flex;
 		flex-wrap: wrap;
