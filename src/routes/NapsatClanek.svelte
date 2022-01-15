@@ -36,6 +36,8 @@
 				console.log(error);
 			});
 	}
+
+	let showHowTo = false;
 </script>
 
 <section>
@@ -88,6 +90,35 @@
 		class="input"
 		bind:value={obrazek}
 	/>
+	<u
+		style="font-size: 24px; font-weight: 700; cursor: pointer;"
+		on:click={() => {
+			showHowTo = !showHowTo;
+		}}
+	>
+		Jak nahrát obrázek?
+	</u>
+
+	{#if showHowTo}
+		<div id="how-to">
+			Nejprve si stáhněte libovolný obrázek z internetu ("Uložit
+			jako..."). Pak přejděte na stránku
+			<a href="https://www.iloveimg.com/crop-image" target="blank">
+				<u>https://www.iloveimg.com/crop-image</u>
+			</a>
+			a stažený obrázek tam nahrejte. Nyní obrázek ořízněte do čtvercové podoby
+			a klikněte vpravo dole na Crop IMAGE. To obrázek ořízne a nabídne ke
+			stažení. Až obrázek stáhnete, přejděte na stránku
+			<a href="https://imgbb.com/" target="blank">
+				<u>https://imgbb.com/</u>
+			</a>. Tam svůj obrázek nahrejte (při nahrávání zvolte "Automaticky
+			nemazat"). Až bude hotovo, vytvoří se odkaz ve formátu
+			https://ibb.co/2h4PmH7. To však ještě NENÍ výsledný odkaz! Na tento
+			vygenerovaný odkaz přejděte, klikněte na váš obrázek pravým
+			tlačítkem a zvolte "Kopírovat adresu obrázku". Tu pak vložte zde na
+			stránku do pole "Obrázek".
+		</div>
+	{/if}
 
 	<p
 		class="label"
@@ -205,5 +236,11 @@
 		margin-bottom: 250px;
 		float: right;
 		cursor: pointer;
+	}
+
+	#how-to {
+		background-color: #fff;
+		padding: 10px 15px;
+		font-size: 22px;
 	}
 </style>
