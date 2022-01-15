@@ -105,6 +105,7 @@
 					splneno: selectedSplneno.cislo,
 					priorita: priorita,
 					prioritaStrany: prioritaStrany,
+					komentar: komentar,
 				}),
 			}
 		);
@@ -115,6 +116,7 @@
 	var popis = "";
 	var citace = "";
 	var odkaz = "";
+	var komentar = "";
 
 	var navrhy = [{ id: 1, text: "", splneno: 4 }];
 </script>
@@ -258,6 +260,21 @@
 		bind:value={odkaz}
 	/>
 
+	<p
+		class="label"
+		on:click={() => {
+			document.getElementById("komentar").focus();
+		}}
+	>
+		Komentář
+	</p>
+	<div
+		contenteditable="true"
+		id="komentar"
+		style="border: 4px solid {strana.barva}"
+		bind:innerHTML={komentar}
+	/>
+
 	<div class="flex">
 		<div>
 			<p class="label">Kategorie</p>
@@ -384,6 +401,27 @@
 		transition: 0.15s;
 	}
 	#popis:focus {
+		-webkit-filter: brightness(90%);
+		filter: brightness(90%);
+	}
+	#komentar {
+		background-color: #ffffff;
+		color: #2d2d2d;
+
+		width: 100%;
+		font-size: 20px;
+		font-family: "Barlow";
+
+		padding: 8px 10px;
+		box-sizing: border-box;
+		border-radius: 5px;
+
+		height: 150px;
+		overflow-y: scroll;
+
+		transition: 0.15s;
+	}
+	#komentar:focus {
 		-webkit-filter: brightness(90%);
 		filter: brightness(90%);
 	}
