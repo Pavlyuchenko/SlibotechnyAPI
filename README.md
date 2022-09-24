@@ -2,6 +2,8 @@
 
 **A simple dashboard for admins where they can easily add or change the information.**
 
+It uses Flask and Sqlalchemy as the database.
+
 ![image](https://user-images.githubusercontent.com/28483030/192084621-2d8e8d7e-4c5d-4c4f-a645-42383dd492d3.png)
 
 #### List of current promises
