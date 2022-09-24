@@ -1,4 +1,5 @@
 # Slibotechny Admin
+### [**Article**](https://michal-pavlicek.tech/project/slibotechny) about this project on my portfolio.
 
 **A simple dashboard for admins where they can easily add or change the information.**
 
